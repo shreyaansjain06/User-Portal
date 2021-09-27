@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/shreyaansjain06/Mern-Web-App#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^6.0.7"
   }
 }
