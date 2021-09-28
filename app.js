@@ -1,19 +1,8 @@
+const dotenv= require('dotenv')
 const express = require('express');
-const port = 3000;
-const mongoose = require('mongoose');
+dotenv.config({path: './config.env'})
 const app = express();
-// define datablase
-const DB ="mongodb+srv://shreyaansjain06:mernwebapp@cluster0.votq7.mongodb.net/mernwebapp?retryWrites=true&w=majority"
-
-// Establishing connection
-mongoose.connect(DB)
-  .then(() => {
-    console.log(`connection successfull`);
-  })
-  .catch((err) => {
-      console.log(err)
-    console.log(`no connection`);
-  });
+require('./db/conn');
 
 // Middleware
 // it helps in authentication
@@ -41,6 +30,6 @@ app.get('/signin', (req, res) => {
 });
 
 // listening on port
-app.listen(port, () => {
-  console.log(`Server is listening on port:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is listening on port:${process.env.PORT}`);
 });
