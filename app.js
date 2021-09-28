@@ -3,6 +3,16 @@ const express = require('express');
 dotenv.config({ path: './config.env' });
 const app = express();
 require('./db/conn');
+
+
+// middleware to access the data of form
+app.use(express.json());
+
+// linking router through middleware
+app.use(require('./router/auth'));
+
+
+
 // const User= require('./models/userSchema');
 
 // Middleware
