@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// stucture of document 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -27,5 +28,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model(User, userSchema);
+// it is basically collection in which there are documents of schema type
+// always put first argument that is name of collection to be singular library converts it to plural
+const User = mongoose.model('User', userSchema);
 module.exports = User;
