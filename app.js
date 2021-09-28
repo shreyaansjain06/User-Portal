@@ -1,8 +1,9 @@
-const dotenv= require('dotenv')
+const dotenv = require('dotenv');
 const express = require('express');
-dotenv.config({path: './config.env'})
+dotenv.config({ path: './config.env' });
 const app = express();
 require('./db/conn');
+// const User= require('./models/userSchema');
 
 // Middleware
 // it helps in authentication
