@@ -6,35 +6,62 @@ router.get('/', (req, res) => {
   res.send('hello this auth page of router');
 });
 
-router.post('/register', (req, res) => {
-  console.log(req.body);
+router.post('/register', async (req, res) => {
+  try {
 
-  // destructuring
-  const { name, email, phone, work, password, cpassword } = req.body;
+    // destructuring
+    const { name, email, phone, work, password, cpassword } = req.body;
 
-  // checking if any field is null
-  if (!name || !email || !phone || !work || !password || !cpassword) {
-    res.status(422).json({ error: 'plz filled the field properly' });
+    // checking if any field is null
+    if (!name || !email || !phone || !work || !password || !cpassword) {
+      res.status(422).json({ error: 'plz filled the field properly' });
+    }
+    const userExist = await User.findOne({ email: email });
+    console.log(userExist)
+    if (userExist) {
+      return res.status(422).json({ error: 'Email already exists' });
+    }
+    const user = new User({ name, email, phone, work, password, cpassword });
+
+    // saving the user(document)
+    await user.save();
+    res.status(201).json({ message: 'user registered succesfully' });
+  } catch (err) {
+    console.log(err);
   }
-  User.findOne({ email: email })
-    .then((userExist) => {
-      if (userExist) {
-        res.status(422).json({ error: 'Email already exists' });
-      }
-      //we can make a document inside User collection   
-      // creating a new user
-      const user = new User({ name, email, phone, work, password, cpassword });
-
-      // saving the user(document)
-      user
-        .save()
-        .then(() => {
-          res.status(201).json({ message: 'user registered succesfully' });
-        })
-        .catch((err) => res.status(500).json({ error: 'failed to register' }));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 });
+
 module.exports = router;
+
+// By promise
+// router.post('/register', (req, res) => {
+//   console.log(req.body);
+
+//   // destructuring
+//   const { name, email, phone, work, password, cpassword } = req.body;
+
+//   // checking if any field is null
+//   if (!name || !email || !phone || !work || !password || !cpassword) {
+//     res.status(422).json({ error: 'plz filled the field properly' });
+//   }
+//   User.findOne({ email: email })
+//     .then((userExist) => {
+//       if (userExist) {
+//         return res.status(422).json({ error: 'Email already exists' });
+//       }
+//       //we can make a document inside User collection
+//       // creating a new user
+//       const user = new User({ name, email, phone, work, password, cpassword });
+
+//       // saving the user(document)
+//       user
+//         .save()
+//         .then(() => {
+//           res.status(201).json({ message: 'user registered succesfully' });
+//         })
+//         .catch((err) => res.status(500).json({ error: 'failed to register' }));
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
