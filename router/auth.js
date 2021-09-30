@@ -47,6 +47,13 @@ router.post('/signin', async (req, res) => {
       // generating token 
       const token= await userLogin.generateAuthToken();
       console.log(token);
+      // making a cookie and its value
+      res.cookie('jwtoken',token,{
+        // adding time when to expire
+        expires: new Date(Date.now()+2589200000),
+        httpOnly: true
+      })
+
       if (isMatch) {
         res.status(201).json({ message: 'Sign in successfully' });
       } else {
