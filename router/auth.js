@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 require('../db/conn');
+const bcrypt = require('bcrypt');
 const User = require('../models/userSchema');
 router.get('/', (req, res) => {
   res.send('hello this auth page of router');
@@ -8,7 +9,6 @@ router.get('/', (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-
     // destructuring
     const { name, email, phone, work, password, cpassword } = req.body;
 
@@ -19,12 +19,40 @@ router.post('/register', async (req, res) => {
     const userExist = await User.findOne({ email: email });
     if (userExist) {
       return res.status(422).json({ error: 'Email already exists' });
-    }
-    const user = new User({ name, email, phone, work, password, cpassword });
+    } else if (cpassword != password) {
+      return res.status(422).json({ error: 'Password does not match' });
+    } else {
+      const user = new User({ name, email, phone, work, password, cpassword });
 
-    // saving the user(document)
-    await user.save();
-    res.status(201).json({ message: 'user registered succesfully' });
+      // saving the user(document)
+      await user.save();
+      res.status(201).json({ message: 'user registered succesfully' });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post('/signin', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(422).json({ error: 'plz filled the field properly' });
+    }
+    const userLogin = await User.findOne({ email: email });
+    // console.log(userLogin);
+    if (userLogin) {
+      const isMatch = await bcrypt.compare(password, userLogin.password);
+
+      // generating token 
+      const token= await userLogin.generateAuthToken();
+      console.log(token);
+      if (isMatch) {
+        res.status(201).json({ message: 'Sign in successfully' });
+      } else {
+        res.status(422).json({ error: 'Invalid credentials' });
+      }
+    }
   } catch (err) {
     console.log(err);
   }
