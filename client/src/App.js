@@ -11,7 +11,7 @@ function App() {
   return (
     <>
     <Navbar/>
-    <Route path="/">
+    <Route exact path="/">
       <Home/>
     </Route>
     <Route path="/about">
