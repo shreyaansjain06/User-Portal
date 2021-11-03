@@ -1,38 +1,35 @@
-.App {
-  text-align: center;
+.signin input:focus{
+  outline: none;
+}
+.img{
+  width: 36rem;
+}
+.w_29{
+  width: 29%;
+}
+.second_box{
+  margin-top: 8rem;
+  width: 65%;
+}
+.w_50{
+  width: 100%;
+}
+.field{
+  height: 2.5rem;
+  font-size: 22px;
+}
+.contact_textarea{
+  font-size: 22px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.profile img{
+  width: 15rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.edit{
+  position: absolute;
+  top:10%;
+  right:0%;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.edit input{
+  border: 0;
 }
