@@ -1,16 +1,21 @@
 import Navbar from './components/Navbar';
 import './App.css';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Home from './components/Home'
 import About from './components/About'
 import Contact from './components/Contact'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import ErrorPage from './components/ErrorPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
     <>
+   
     <Navbar/>
+    <Switch>
     <Route exact path="/">
       <Home/>
     </Route>
@@ -26,6 +31,10 @@ function App() {
     <Route path="/signup">
       <Signup/>
     </Route>
+    <Route >
+      <ErrorPage/>
+    </Route>
+    </Switch>
     </>
   );
 }
