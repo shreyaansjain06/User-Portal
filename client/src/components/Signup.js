@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import img from '../assets/img/6461.jpg';
 const Signup = () => {
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    work: '',
+    password: '',
+    cpassword: '',
+  });
+  let name, value;
+  const handleInput = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    setUser({ ...user, [name]: value });
+  };
   return (
     <div className="position-absolute top-50 start-50 translate-middle w-75">
       <div className="shadow p-3 mb-5 bg-body rounded ">
@@ -12,80 +26,92 @@ const Signup = () => {
                 <div className="mb-4">
                   <span className="mdi mdi-account me-2"></span>
                   <input
-                   name="signin_name"
+                    name="name"
                     type="text"
                     className="border-top-0 border-start-0 border-end-0 shadow-none"
                     placeholder="Your Name"
                     autoComplete="off"
                     id="signup_name"
+                    value={user.name}
+                    onChange={handleInput}
                   />
                 </div>
                 <div className="mb-4">
                   <span className="mdi mdi-email me-2"></span>
                   <input
-                   name="signin_email"
+                    name="email"
                     type="text"
                     className="border-top-0 border-start-0 border-end-0"
                     placeholder="Your Email"
                     autoComplete="off"
                     id="signup_email"
+                    value={user.email}
+                    onChange={handleInput}
                   />
                 </div>
                 <div className="mb-4">
                   <span className="mdi mdi-phone me-2"></span>
                   <input
-                   name="signin_phone"
+                    name="phone"
                     type="text"
                     className="border-top-0 border-start-0 border-end-0"
                     placeholder="Mobile Number"
                     autoComplete="off"
                     id="signin_number"
+                    value={user.phone}
+                    onChange={handleInput}
                   />
                 </div>
                 <div className="mb-4">
                   <span className="mdi mdi-storefront-outline me-2"></span>
                   <input
-                   name="signin_work"
+                    name="work"
                     type="text"
                     className="border-top-0 border-start-0 border-end-0"
                     placeholder="Your Profession"
                     autoComplete="off"
                     id="signin_profession"
+                    value={user.work}
+                    onChange={handleInput}
                   />
                 </div>
                 <div className="mb-4">
                   <span className="mdi mdi-lock me-2"></span>
                   <input
-                   name="signin_password"
+                    name="password"
                     type="text"
                     className="border-top-0 border-start-0 border-end-0"
                     placeholder="Password"
                     autoComplete="off"
                     id="signup_password"
+                    value={user.password}
+                    onChange={handleInput}
                   />
                 </div>
                 <div className="mb-4">
                   <span className="mdi mdi-lock me-2"></span>
                   <input
-                   name="signin_cpassword"
+                    name="cpassword"
                     type="text"
                     className="border-top-0 border-start-0 border-end-0"
                     placeholder="Confirm Password"
                     autoComplete="off"
                     id="signup_cpassword"
+                    value={user.cpassword}
+                    onChange={handleInput}
                   />
                 </div>
                 <input
-                 name="signin_submit"
-                 name="signin_name"
-                    type="submit"
-                    className="btn btn-primary ms-4 mt-3"
-                    value="Regsister"
-                  />
+                  name="submit"
+                  type="submit"
+                  className="btn btn-primary ms-4 mt-3"
+                  value="Sign up"
+                  // onChange={handleSubmit}
+                />
               </form>
             </div>
             <div className="col text-center">
-            <img className="img mt-5" src={img} alt="img" />
+              <img className="img mt-5" src={img} alt="img" />
             </div>
           </div>
         </div>
