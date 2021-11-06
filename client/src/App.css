@@ -8,7 +8,7 @@
   width: 29%;
 }
 .second_box{
-  margin-top: 8rem;
+  margin-top: 4rem;
   width: 65%;
 }
 .w_50{
@@ -21,9 +21,11 @@
 .contact_textarea{
   font-size: 22px;
 }
-
+.h-63{
+  height: 63%;
+}
 .profile img{
-  width: 15rem;
+  width: 13rem;
 }
 .edit{
   position: absolute;
@@ -32,4 +34,27 @@
 }
 .edit input{
   border: 0;
+}
+.about_details{
+  position: absolute;
+  top:51%;
+}
+.work_top{
+  position: absolute;
+  top:66%
+}
+.Error_header{
+  font-size: 13rem;
+  color: rgb(224, 224, 224);
+}
+.Error_description{
+  font-size: 1.4rem;
+}
+.left_side{
+  background-color: rgb(163, 226, 255);
+  height: 100vh;
+}
+.desc{
+  font-weight: bold;
+  font-size: 4rem;
 }
