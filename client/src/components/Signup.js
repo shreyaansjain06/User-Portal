@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom'
 import img from '../assets/img/6461.jpg';
 const Signup = () => {
+  const history=useHistory();
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -15,13 +17,41 @@ const Signup = () => {
     value = e.target.value;
     setUser({ ...user, [name]: value });
   };
+const handleSubmit=async(e)=>{
+  // console.log(e);
+  e.preventDefault();
+  const {name,email,phone,work,password,cpassword}=user;
+  // console.log(user);
+   const res= await fetch('/register',{ 
+     method: "POST",
+     headers:{
+       "Content-Type": "application/json"
+     },
+     body:JSON.stringify({
+      //  dont need to write name:name when both same
+      name,email,phone,work,password,cpassword
+     })
+   })
+   const data= await res.json();
+   if(data.status===422||!data)
+   {
+     window.alert("invalid registration");
+     console.log("invalid registration");
+   }
+   else{
+     window.alert("registration successfull");
+     console.log("registration Sucessfull");
+     history.push('/login')
+   }
+}
+
   return (
     <div className="position-absolute top-50 start-50 translate-middle w-75">
       <div className="shadow p-3 mb-5 bg-body rounded ">
         <div className="container">
           <div className="row">
             <div className="col">
-              <form className="m-5 signin">
+              <form className="m-5 signin" method="POST">
                 <h1 className="mt-4 mb-4 text-start">Sign up</h1>
                 <div className="mb-4">
                   <span className="mdi mdi-account me-2"></span>
@@ -79,7 +109,7 @@ const Signup = () => {
                   <span className="mdi mdi-lock me-2"></span>
                   <input
                     name="password"
-                    type="text"
+                    type="password"
                     className="border-top-0 border-start-0 border-end-0"
                     placeholder="Password"
                     autoComplete="off"
@@ -92,7 +122,7 @@ const Signup = () => {
                   <span className="mdi mdi-lock me-2"></span>
                   <input
                     name="cpassword"
-                    type="text"
+                    type="password"
                     className="border-top-0 border-start-0 border-end-0"
                     placeholder="Confirm Password"
                     autoComplete="off"
@@ -106,7 +136,7 @@ const Signup = () => {
                   type="submit"
                   className="btn btn-primary ms-4 mt-3"
                   value="Sign up"
-                  // onChange={handleSubmit}
+                  onClick={handleSubmit}
                 />
               </form>
             </div>
