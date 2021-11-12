@@ -118,7 +118,7 @@ const About = () => {
                 <p className="">WORK LINK</p>
                 <a
                   className="text-decoration-none text-dark"
-                  href=""
+                  href="/"
                   target="_shreyaans"
                 >
                   Github
@@ -126,7 +126,7 @@ const About = () => {
                 <br />
                 <a
                   className="text-decoration-none text-dark"
-                  href=""
+                  href="/"
                   target="_shreyaans"
                 >
                   Linkedin
@@ -134,7 +134,7 @@ const About = () => {
                 <br />
                 <a
                   className="text-decoration-none text-dark"
-                  href=""
+                  href="/"
                   target="_shreyaans"
                 >
                   Twitter
@@ -142,7 +142,7 @@ const About = () => {
                 <br />
                 <a
                   className="text-decoration-none text-dark"
-                  href=""
+                  href="/"
                   target="_shreyaans"
                 >
                   Website
