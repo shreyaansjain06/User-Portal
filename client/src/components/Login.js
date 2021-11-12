@@ -1,6 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import img from '../assets/img/6461.jpg';
+import {useHistory} from "react-router-dom";
 const Login = () => {
+  const history = useHistory()
+  const [email, setEmail]=useState('')
+  const [password,setPassword]=useState('')
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    const res= await fetch('/signin',{
+      method: 'POST',
+      headers: {
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify({email,password})
+    })
+    console.log(res)
+    const data= await res.json()
+    console.log(data)
+    if (data.status === 422||!data){
+      window.alert("invalid credentials")
+    }
+    else{
+      window.alert("registration successfully")
+      history.push('/')
+    }
+    
+
+  }
   return (
     <div className="position-absolute top-50 start-50 translate-middle w-75">
       <div className="shadow p-3 mb-5 bg-body rounded ">
@@ -25,6 +52,8 @@ const Login = () => {
                     placeholder="Your Email"
                     autoComplete="off"
                     id="login_email"
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
                   />
                 </div>
 
@@ -32,11 +61,13 @@ const Login = () => {
                   <span className="mdi mdi-lock me-2"></span>
                   <input
                   name="login_password"
-                    type="text"
+                    type="password"
                     className="border-top-0 border-start-0 border-end-0"
                     placeholder="Password"
                     autoComplete="off"
                     id="login_password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
                   />
                 </div>
 
@@ -45,6 +76,7 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary ms-4 mt-3"
                   value="Log In"
+                  onClick={handleSubmit}
                 />
               </form>
             </div>
