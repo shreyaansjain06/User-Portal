@@ -53,21 +53,21 @@ const Contact = () => {
                     id="contact_form_name"
                     className="w_29 field"
                     placeholder="Your Name"
-                    required="true"
+                    required={true}
                   />
                   <input
                     type="text"
                     id="contact_form_email"
                     className="w_29 field"
                     placeholder="Your Email"
-                    required="true"
+                    required={true}
                   />
                   <input
                     type="text"
                     id="contact_form_phone"
                     className="w_29 field"
                     placeholder="Your phone"
-                    required="true"
+                    required={true}
                   />
                 </div>
                 <div className="contact_form_text mt-5">
