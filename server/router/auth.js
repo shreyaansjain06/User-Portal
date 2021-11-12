@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
   try {
     // destructuring
     const { name, email, phone, work, password, cpassword } = req.body;
-
+    console.log(req.body);
     // checking if any field is null
     if (!name || !email || !phone || !work || !password || !cpassword) {
       res.status(422).json({ error: 'plz filled the field properly' });
@@ -40,7 +40,7 @@ router.post('/signin', async (req, res) => {
       res.status(422).json({ error: 'plz filled the field properly' });
     }
     const userLogin = await User.findOne({ email: email });
-    // console.log(userLogin);
+    console.log(userLogin);
     if (userLogin) {
       const isMatch = await bcrypt.compare(password, userLogin.password);
 
